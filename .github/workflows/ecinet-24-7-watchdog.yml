@@ -1,0 +1,90 @@
+name: ECINet 24/7 Forensic Watchdog
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit-ecinet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Forensic Telemetry & Bundle Audit
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python3 - << 'EOF'
+          import urllib.request, json, time, os, re, ssl
+
+          ctx = ssl._create_unverified_context()
+          baseline_date = 1792138790947
+          baseline_bundle = "main.6faf5084.js"
+
+          os.makedirs("telemetry", exist_ok=True)
+          timestamp = time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
+          print(f"[{timestamp}] Running ECINet 24/7 Watchdog Audit...")
+
+          # 1. Check meta.json
+          meta_url = "https://ecinet.eci.gov.in/meta.json"
+          req = urllib.request.Request(meta_url, headers={"User-Agent": "Mozilla/5.0"})
+          try:
+              with urllib.request.urlopen(req, context=ctx, timeout=30) as resp:
+                  meta_data = json.loads(resp.read().decode())
+                  current_date = meta_data.get("buildDate")
+          except Exception as e:
+              current_date = f"Error: {e}"
+
+          print(f"Baseline BuildDate: {baseline_date}")
+          print(f"Current BuildDate:  {current_date}")
+
+          status = "UNMODIFIED"
+          if isinstance(current_date, int) and current_date != baseline_date:
+              status = "ROTATION_DETECTED"
+              print("🚨 CRITICAL: ECINet build rotation detected!")
+              
+              # Generate Alert Document
+              alert_file = f"telemetry/ALERT_{int(time.time())}.md"
+              with open(alert_file, "w") as f:
+                  f.write(f"# 🚨 ECINet Build Rotation Detected\n\n")
+                  f.write(f"- **Timestamp:** {timestamp}\n")
+                  f.write(f"- **Previous BuildDate:** {baseline_date}\n")
+                  f.write(f"- **New BuildDate:** {current_date}\n")
+                  f.write(f"- **Action Required:** Run full AST diff on newly rotated bundles.\n")
+
+          # Write Heartbeat Telemetry
+          heartbeat = {
+              "timestamp": timestamp,
+              "baseline_build_date": baseline_date,
+              "current_build_date": current_date,
+              "status": status,
+              "agent": "Hermes-Cloud-Watchdog",
+              "monitored_portal": "https://ecinet.eci.gov.in/"
+          }
+          with open("telemetry/heartbeat.json", "w") as f:
+              json.dump(heartbeat, f, indent=2)
+
+          print("Audit complete. Heartbeat recorded.")
+          EOF
+
+      - name: Commit Telemetry & Audit Logs
+        run: |
+          git config --global user.name "Hermes Agent Cloud Watchdog"
+          git config --global user.email "hermes-agent@users.noreply.github.com"
+          git add telemetry/
+          if git diff --staged --quiet; then
+            echo "No telemetry changes to commit."
+          else
+            git commit -m "chore(telemetry): record ECINet 24/7 watchdog audit [skip ci]"
+            git push origin main
+          fi
