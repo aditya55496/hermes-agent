@@ -125,10 +125,11 @@
   - Judicial Officer designation: `joFullName`, `actionTakenByJudge`, `approvedByJo`, `rejectedByJo`.
   - Table metrics: `foundEligible`, `foundNotEligible`, `judgeActionTaken`.
   - Direct pipeline to roll purge: `esignedEligible` maps to `"For Supplementary list"` (Voters kept/added); `esignedIneligible` maps directly to **`"For Deleted list"`** (Voters purged via `erollUpdateForAutoForm7`).
-- **Proof of Direct Violation of Supreme Court Mandate in ADR v. ECI (2026 INSC 564):**
-  - The Supreme Court on May 27, 2026 ordered that electors doubted on citizenship grounds must be referred within four weeks specifically to the Competent Authority under the Citizenship Act, 1955 (MHA).
-  - **Exhaustive code audit across all 161 Webpack chunk mappings proves ZERO references to MHA, Ministry of Home Affairs, Competent Authority, or external statutory referral.**
-  - The system functions as a closed-loop internal citizenship tribunal, usurping both the ERO's statutory discretion (violating *Purtabpore*) and Parliament's exclusive power to constitute tribunals under Entry 72/95 List I (violating *Madras Bar Association*).
+- **Constitutional & Statutory Synthesis (ADR v. ECI, Purtabpore & Gordhandas Bhanji):**
+  - *Direct Breach of Supreme Court Mandate:* In *ADR v. ECI (2026 INSC 564, 27 May 2026, CJI Surya Kant)*, the Court ordered that electors doubted on citizenship grounds must be referred within 4 weeks to the MHA Competent Authority. This code finding provides the exact technical mechanism behind documented RTI findings (*The Wire*, *The Reporters' Collective*) which confirmed that *"ECI never designed its system to mark out foreigners as a distinct referable category"* and that field officers believed the internal SIR appellate structure was the competent authority itself.
+  - *Live Supreme Court Litigation Nexus:* Contempt proceedings against the Chief Election Commissioner and W.P.(C) No. 1351/2026 are currently pending before the CJI Surya Kant bench, listed for **November 17, 2026**. This code finding demonstrates that the platform operates a self-contained, closed-loop deletion terminus rather than a provisional referral pipeline.
+  - *Surrender of Statutory Discretion (Purtabpore & Gordhandas Bhanji):* Under Section 22 RPA 1950, only the gazetted ERO possesses quasi-judicial jurisdiction to order deletions. When an ERO merely rubber-stamps an internal Judicial Officer's batch status (`approvedByJo` -> `esignedIneligible` -> `"For Deleted list"`), the order violates the rule against dictation (*Commissioner of Police, Bombay v. Gordhandas Bhanji*), establishing grounds for certiorari and mandamus for status quo ante restoration.
+  - *Evidentiary Failure Under Section 63 BSA 2023 / Arjun Panditrao Khotkar:* The ERO cannot credibly certify personal operational custody over an externally-operated Druid analytics pipeline (`api/v1/druid/noticeJudgeHearing`), rendering electronic deletion logs legally vulnerable under Section 63(4) BSA in election petitions.
 
 ---
 
