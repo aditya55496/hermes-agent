@@ -3,122 +3,42 @@
 ## Operational Intelligence Dossier & Technical Evidence Baseline
 **Target Portal:** `https://ecinet.eci.gov.in/`  
 **Production Build Date:** `1792138790947` (`main.6faf5084.js`)  
-**Evidence Standard:** Confirmed via static AST extraction, cryptographic verification, and client routing decompilation.
+**Evidence Standard:** Confirmed via static AST extraction, cryptographic verification, exact byte offsets, and client routing decompilation.
 
 ---
 
-## 1. Cryptographic Architecture: Payload Encryption & Offline Parsing
-### A. Static Implementation Failure Modes
+## 1. Cryptographic Architecture: The Dual-Implementation Divergence
+### A. Compliant Hybrid Envelope Encryption in Production (Module 5606 & Module 69303)
+- **Exact File:** `ecinet_main_unescaped.js` (Module `5606` at **Byte Offset: 237,195**, integrated via Module `69303` at **Byte Offset: 1,172,468**).
+- **Asymmetric Key:** 2048-bit RSA public key embedded directly: `s = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArb7++BxL/YN8OIln+6FL9Gnw5DNmQ/VFZXss+J+TuQyJc891JbqbijxYQNEin2c2u+CnpXpoGQ/1gUSzDMJeNS3sNSlIUykp2dt7xIm/cmV4sZ/c769vCxVRosMfRaZJnBAah+m1X26lEhnOo0wpAB9Txr8RIyBe6h7PiQWykeJeh6UacOBBX28kgkq7+vJhW8HgB38lt32XRocznRYwS9LqR7ZweFmQhTr1+EGrqiEKCOCxMYgHR2SQckb96hZ9kWzfzeun4bUO5oXKJciLkiS1IgKieADEvYLgu129ZIpn1H+8H+8ikNNVETqEDDMtqcQcQmWppJvcWHaXAs+f8QIDAQAB"`
+- **Key Freshness:** Ephemeral 256-bit AES key per request via `window.crypto.getRandomValues(new Uint8Array(32))`.
+- **Nonce Freshness:** Ephemeral 12-byte GCM IV per request via `window.crypto.getRandomValues(new Uint8Array(12))`.
+- **Authenticated Encryption:** `AES-GCM` authenticated payload encryption with `RSA-OAEP` (SHA-256) key encapsulation.
+
+### B. Broken Cryptographic Subsystems (Modules 28636 & 37050)
 1. **CWE-327 (Electronic Codebook - ECB Mode) + CWE-321 (Hardcoded Symmetric Key):**
-   - **Key:** `4WS8851W824PRA45` (Module `49981` constant `Ct`, exported as `Lq`).
-   - **Mode:** AES-128-ECB with PKCS7 padding (Module `28636` in `ecinet_chunk_4264.js`).
-   - **Usage:** Deterministic query encryption for `/eci-backend/public/api/get-index-card-details?cat_id=FR%2FE3iiuGM9sewDDzjJyCQ%3D%3D&page=`. Identical plaintext pages yield identical ciphertexts.
+   - **Exact File:** `ecinet_chunk_4264.js` (Module `28636`, Line 1).
+   - **Key Origin:** `ecinet_main_unescaped.js` (Module `49981`, **Byte Offset: 723,350**, Constant `Ct` -> `Lq`: `4WS8851W824PRA45`).
+   - **Usage:** AES-128-ECB PKCS7 encryption for `/eci-backend/public/api/get-index-card-details?cat_id=FR%2FE3iiuGM9sewDDzjJyCQ%3D%3D&page=`. Identical plaintext blocks produce identical ciphertext blocks, leaking structural frequency.
 2. **CWE-329 (Static Nonce/IV Reuse in AES-GCM) + CWE-321 (Hardcoded Symmetric Key):**
-   - **Key:** `wt = "9567b98056e9250c"` (Module `49981`, exported as `Tt`).
-   - **IV:** `Ot = "558fadb2c64c25ec"` (Module `49981`, exported as `te`).
-   - **Mode:** AES-GCM with 128-bit authentication tag (Module `37050` in `ecinet_chunk_3209.js`).
-   - **Usage:** Reusing static IV across all sessions breaks AES-GCM authenticity guarantees and enables GHASH key recovery.
-
-### B. Pure-Python Offline Diagnostic Tool
-```python
-import base64
-import json
-from urllib.parse import unquote
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.primitives import padding
-from cryptography.hazmat.backends import default_backend
-
-ECB_STATIC_KEY = b"4WS8851W824PRA45"
-GCM_STATIC_KEY = b"9567b98056e9250c"
-GCM_STATIC_IV  = b"558fadb2c64c25ec"
-
-def parse_offline_ecb_payload(ciphertext_b64: str, static_key: bytes = ECB_STATIC_KEY) -> dict:
-    try:
-        raw_ciphertext = base64.b64decode(unquote(ciphertext_b64))
-        cipher = Cipher(algorithms.AES(static_key), modes.ECB(), backend=default_backend())
-        padded_plaintext = cipher.decryptor().update(raw_ciphertext) + cipher.decryptor().finalize()
-        unpadder = padding.PKCS7(128).unpadder()
-        plaintext = unpadder.update(padded_plaintext) + unpadder.finalize()
-        return json.loads(plaintext.decode('utf-8'))
-    except Exception as e:
-        return {"status": "error", "message": f"ECB Decryption failed: {str(e)}"}
-
-def parse_offline_gcm_envelope(encrypted_payload_b64: str, iv_b64: str, key_bytes: bytes = GCM_STATIC_KEY, tag_length: int = 16) -> dict:
-    try:
-        raw_payload = base64.b64decode(unquote(encrypted_payload_b64))
-        iv = base64.b64decode(unquote(iv_b64))
-        ciphertext = raw_payload[:-tag_length]
-        tag = raw_payload[-tag_length:]
-        cipher = Cipher(algorithms.AES(key_bytes), modes.GCM(iv, tag), backend=default_backend())
-        plaintext = cipher.decryptor().update(ciphertext) + cipher.decryptor().finalize()
-        return json.loads(plaintext.decode('utf-8'))
-    except Exception as e:
-        return {"status": "error", "message": f"GCM Decryption failed: {str(e)}"}
-```
+   - **Exact File:** `ecinet_chunk_3209.js` (Module `37050`, Line 1).
+   - **Key/IV Origin:** `ecinet_main_unescaped.js` (Module `49981`, **Byte Offset: 723,350**, Key `wt = "9567b98056e9250c"`, Static IV `Ot = "558fadb2c64c25ec"`).
+   - **Usage:** Static IV reuse across all client sessions destroys Galois/Counter mode authenticity guarantees and enables GHASH authentication key recovery.
 
 ---
 
-## 2. Statutory Entity-Relationship Model (Conduct of Elections Rules, 1961)
-Governed by Rule 49L (Form 17A Register of Voters), Rule 49S (Form 17C Part I Account of Votes), and Rule 56C (Form 17C Part II Counting Result).
+## 2. Statutory Digital Custody: Rules 92, 93, 94 CER 1961 & Defensive Merkle Architecture
+### A. Statutory Text & Precedent
+- **Rule 92 (Conduct of Elections Rules, 1961):** Primary custody provision mandating that election packets remain in safe custody of the District Election Officer.
+- **Rule 93 (Production & Inspection):** Governs inspection once in custody. Form 17A registers fall under Rule 93(1)(dd), strictly requiring a competent court order (*Ram Sewak Yadav v. Hussain Kamil Kidwai*, *Hari Ram v. Hira Singh*).
+- **Rule 94 (Disposal):** Sets mandatory retention periods.
+- **The Technical Audit Fact:** Under Section 100(1)(d) RPA 1951, the legally defensible finding is that **in the absence of an append-only cryptographic hash log, the custody integrity of digital records stored in mutable flat object storage cannot be independently verified**.
 
-```
-       +-----------------------+              +---------------------------+
-       |   POLLING_STATION     |              |       ELECTOR_RECORD      |
-       +-----------------------+              +---------------------------+
-       | PK  station_uid       |              | PK  epic_number           |
-       |     ac_number         |              |     elector_name          |
-       |     part_number       |              |     part_serial_number    |
-       +-----------+-----------+              +-------------+-------------+
-                   | 1                                      | 1
-                   |                                        |
-                   | 1..*                                   | 1..*
-       +-----------v-----------+              +-------------v-------------+
-       |   FORM_17A_REGISTER   |              |  FORM_17A_VOTER_ENTRY     |
-       +-----------------------+              +---------------------------+
-       | PK  register_id       | 1        1..*| PK  entry_id              |
-       | FK  station_uid       +------------->| FK  register_id           |
-       |     date_of_poll      |              |     sl_no_in_register     |
-       +-----------------------+              |     sl_no_in_electoral_roll|
-                                              |     signature_thumb_flag  |
-                                              +---------------------------+
-                   | 1
-                   |
-                   | 1
-       +-----------v---------------------+
-       |    FORM_17C_PART_I_ACCOUNT      |
-       +---------------------------------+
-       | PK  account_id                  |
-       | FK  station_uid                 |
-       |     cu_serial_number            |
-       |     bu_serial_number            |
-       |     vvpat_serial_number         |
-       |     total_electors_assigned     |
-       |     total_voters_as_per_17A     |
-       |     voters_not_allowed_to_vote  |
-       |     votes_not_recorded (49M)    |
-       |     test_votes_recorded (49MA)  |
-       |     total_votes_in_evm          |
-       |     discrepancy_17A_vs_evm      |
-       |     presiding_officer_sign_dttm |
-       +-----------------+---------------+
-                         | 1
-                         | 1
-       +-----------------v---------------+
-       |    FORM_17C_PART_II_COUNTING    |
-       +---------------------------------+
-       | PK  counting_result_id          |
-       | FK  account_id                  |
-       |     candidate_votes_json        |
-       |     total_valid_votes_counted   |
-       |     discrepancy_part1_vs_part2  |
-       |     returning_officer_sign_dttm |
-       +---------------------------------+
-```
-**Observed Severance:**
-- Form 17C / 17A relational schema is completely uninstantiated in the client database models.
-- The React router completely omits routes for Form 17C (IDs 44 & 45).
-- Form 17A (Register of Voters) is absent from the entire application catalog and routing table.
-- Polling station data is shunted to unindexed object storage (`OBJECTSTORE_UPLOAD_URL`).
+### B. Defensive RFC 6962-Style Merkle Transparency Architecture
+1. **Content-Addressing at Submission:** Every Form 17A/17C record is SHA-256 hashed immediately upon finalization.
+2. **Append-Only Merkle Log (RFC 6962):** Each hash becomes a leaf in an append-only tree.
+3. **Multi-Party Signed Tree Heads (STHs):** Periodic STHs published to independent, mutually distrusting parties (party BLAs, court registry, press pool).
+4. **Co-Signing at Creation:** Presiding officer and polling agents sign the leaf hash prior to insertion.
 
 ---
 
@@ -127,21 +47,42 @@ Governed by Rule 49L (Form 17A Register of Voters), Rule 49S (Form 17C Part I Ac
 - **Executable Router:** 109 bound routes (`createBrowserRouter`, offset 1,209,270).
 - **Severed / Unrouted Items:** **37 out of 102 reports** have no bound component and fall into wildcard 404 handlers.
   - Critical Severed Reports: Form 17C (`[44]`), Form 17C Part 1 (`[45]`), Mock Poll Certificate (`[59]`), Mockpoll (`[60]`), EVMs Replacement (`[38]`), EVM Details (`[37]`), Form 22 (`[46]`), Form 22/24 Ack (`[47]`), Form 24 (`[48]`), Poll Day Report Annexure 28 (`[67]`), Feedback Report Annexure L (`[41]`), BLO Register (`[9]`), Manpower (`[57]`), Observer (`[62]`).
+  - Total Absence: **Form 17A (Register of Voters)** is absent from both the catalog and router.
 
 ---
 
-## 4. Evidentiary Constitutional Violation Matrix
-| # | Technical Artifact | Operating Mechanism | Statutory Breach | Constitutional Articles Violated |
-|---|--------------------|---------------------|------------------|----------------------------------|
-| 1 | `ctzver` Lineage Logic (Module 53087) | Birth cutoffs (CAT-1 to CAT-4); demands ancestral rolls & parental voter records | Citizenship Act 1955 (§3); Registration of Electors Rules 1960 (Rule 13, Form 6) | **Articles 14, 325, 326:** Ultra vires citizenship proof; breaches universal adult suffrage |
-| 2 | `erollUpdateForAutoForm7` / `bulkDeleteAutoForm7Requests` (Module 49981) | Programmatic automated Form 7 voter deletion without physical signed complaints | RPA 1950 (§22, §23); Registration of Electors Rules 1960 (Rules 19, 20) | **Articles 14, 21, 326:** Violates natural justice (*audi alteram partem*); disenfranchisement without hearing |
-| 3 | Cleartext Identity Scans (`getForm6DetailsByReferenceNo`) | Unmasked Aadhaar numbers and raw identity scans served over broken client crypto | IT Act 2000 (§43A); Aadhaar Act 2016 (§29); DPDP Act 2023 | **Article 21:** Infringes fundamental right to privacy (*Puttaswamy v. UOI*) |
-| 4 | `MARK_POLITICAL_PARTY_DISABLE` (Module 49981) | Unilateral centralized software switch deactivating registered political party profiles & BLAs | RPA 1951 (§29A); Conduct of Elections Rules 1961 (Rule 12) | **Articles 14, 19(1)(c), 324:** Destroys democratic level playing field & statutory audit |
-| 5 | `/searchInSIR/S2UA4DPDF-JK4QWODSE` & `bh_2003_eroll` | Unrouted backdoors isolating queries under non-public legacy subsets | Registration of Electors Rules 1960 (Rule 22) | **Articles 14, 325:** Violates single general electoral roll mandate |
+## 4. Finding #27: The 2003 Ancestral Lineage & Last SIR Verification Engine
+- **Exact File:** `ecinet_chunk_8556.js`
+- **Exact Byte Offset:** `36,442`
+- **Endpoint:** `POST https://gateway-s2-blo.eci.gov.in/api/v1/elastic-sir/get-eroll-data-2003`
+- **Configuration:** `{ withCredentials: false }` (unauthenticated cross-origin request)
+- **Branching Logic:**
+  - `categoryType === "self"` -> `Tl(V.oldStateCd, V.oldAcNo, V.oldPartNo, V.oldPslNo, "Blo")`
+  - `categoryType === "progeny"` -> `Tl(V.relationOldStateCd, V.relationOldAcNo, V.relationOldPartNo, V.relationPlsPslNo, "Blo")`
+  - ERO Administrative Audit: `Tl(V.lastSirState, V.lastSirAc, V.lastSirPart, V.lastSirSerialNo, "Ero")`
 
 ---
 
-## 5. Microservice Inventory Summary (251 Endpoints / 36 Services)
+## 5. Finding #28: Unindexed Object Storage Architecture with Presigned URLs
+- **Exact File:** `ecinet_main_unescaped.js`
+- **Exact Byte Offsets:** `1,260,136` through `1,260,656` (Module `yl`)
+- **Integration Offsets in `ecinet_chunk_8556.js`:** `18,401`, `20,288`, `32,867`, and `47,034`
+- **Verbatim Endpoints:**
+  ```javascript
+  OBJECTSTORE_GET_URL: "api/v1/document/getFile?bucketName=objectstorage&fileName=",
+  OBJECT_STORE_GET_PRESIGNED_BASE_URL: `${o.nH}/getPresignedFile?bucketName=objectstorage&fileName=`,
+  OBJECT_STORE_DOWNLOAD_PRESIGNED_BASE_URL: `${o.nH}/downloadPresignedFile?bucketName=objectstorage&fileName=`,
+  OBJECT_STORE_GET_FILE_BASE_URL: `${o.nH}/getFile?bucketName=objectstorage&fileName=`,
+  OBJECTSTORE_UPLOAD_URL: "api/v1/document/uploadFile",
+  OBJECTSTORE_DOWNLOAD_URL: "api/v1/document/downloadFile?bucketName=objectstorage&fileName=",
+  OBJECTSTORE_DELETE_URL: "api/v1/document/deleteFile?bucketName=objectstorage&fileName="
+  ```
+- **Extracted Document Types Resolved via Presigned URLs:**
+  `ERO/AERO-Extract-of-Last-SIR-`, `Citizen-Extract-of-Last-SIR-`, `BLO-Extract-of-Last-SIR-`, `Citizen-Document-1-Front/Back` through `Citizen-Document-6-Front/Back`, `Supporting-Document-Front/Back`.
+
+---
+
+## 6. Microservice Inventory Summary (251 Endpoints / 36 Services)
 - `user-management`: 69 endpoints (role mapping, disable officer, Keycloak assign)
 - `druid` & analytics: 28 endpoints (logical discrepancies, BLA pendency, enum tracking)
 - `vendor`: 14 endpoints (vendor onboarding, printing export, disable vendor)
