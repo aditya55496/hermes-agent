@@ -112,6 +112,26 @@
 
 ---
 
+### Finding #31: The Extra-Statutory "Judicial Officer" & "Appellate Tribunal" Shadow Machinery
+- **Exact Files & Offsets:** `ecinet_chunk_9683.js` (Offsets 3,695, 3,833, 3,908, 9,198) & `ecinet_chunk_164.js` (Offset 1,200).
+- **Target Routes:**
+  - `/home/sir/sir-phase2/individuals-under-adjudication-dashboard`
+  - `/home/sir/sir-phase2/appellate-tribunal-appeal-dashboard`
+- **Target APIs & Exports:**
+  - `POST api/v1/druid/noticeJudgeHearing` & `POST api/v1/druid/joUserDetails`
+  - `POST api/v1/druid/appeal`
+  - Export PDF: `${Q}_Electors_Under_Adjudication.pdf` & `${$}_JO_Appeal_Report.pdf`
+- **The Adjudication & Deletion Execution Pipeline:**
+  - Judicial Officer designation: `joFullName`, `actionTakenByJudge`, `approvedByJo`, `rejectedByJo`.
+  - Table metrics: `foundEligible`, `foundNotEligible`, `judgeActionTaken`.
+  - Direct pipeline to roll purge: `esignedEligible` maps to `"For Supplementary list"` (Voters kept/added); `esignedIneligible` maps directly to **`"For Deleted list"`** (Voters purged via `erollUpdateForAutoForm7`).
+- **Proof of Direct Violation of Supreme Court Mandate in ADR v. ECI (2026 INSC 564):**
+  - The Supreme Court on May 27, 2026 ordered that electors doubted on citizenship grounds must be referred within four weeks specifically to the Competent Authority under the Citizenship Act, 1955 (MHA).
+  - **Exhaustive code audit across all 161 Webpack chunk mappings proves ZERO references to MHA, Ministry of Home Affairs, Competent Authority, or external statutory referral.**
+  - The system functions as a closed-loop internal citizenship tribunal, usurping both the ERO's statutory discretion (violating *Purtabpore*) and Parliament's exclusive power to constitute tribunals under Entry 72/95 List I (violating *Madras Bar Association*).
+
+---
+
 ## 7. Microservice Inventory Summary (251 Endpoints / 36 Services)
 - `user-management`: 69 endpoints (role mapping, disable officer, Keycloak assign)
 - `druid`: 19 endpoints + `analytics`: 8 endpoints (Druid roll query, gender ratio, anomaly metrics)
