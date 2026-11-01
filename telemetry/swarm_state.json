@@ -1,7 +1,7 @@
 {
-  "swarm_timestamp": "2026-11-01 22:00:00 UTC",
+  "swarm_timestamp": "2026-11-01 22:20:00 UTC",
   "swarm_name": "ECINet 100-Agent Master Autonomous Century Fleet",
-  "fleet_status": "ALL_100_AGENTS_SYNCHRONIZED_WITH_DEFINITIVE_MASTER_DOSSIER",
+  "fleet_status": "ALL_100_AGENTS_SYNCHRONIZED_WITH_FINDING_29_AND_ADR_PRECEDENT",
   "lead_orchestrator": "hermes-master-orchestrator",
   "total_active_agents": 100,
   "total_battalions": 10,
@@ -15,13 +15,16 @@
     "total_backend_microservices": 36,
     "total_cataloged_statutory_reports": 102,
     "total_severed_unrouted_reports": 37,
-    "form_17a_register_of_voters_status": "COMPLETELY_ABSENT_FROM_CATALOG_AND_ROUTER",
-    "form_17c_status": "SEVERED_404_IN_REACT_ROUTER",
-    "discovered_module_5606": "RSA-OAEP-2048 + AES-256-GCM Ephemeral Hybrid Envelope Encryption",
-    "discovered_module_28636": "AES-128-ECB Deterministic Query Encryption (Key: 4WS8851W824PRA45)",
-    "discovered_module_37050": "AES-GCM Static IV Reuse (Key: 9567b98056e9250c, IV: 558fadb2c64c25ec)",
-    "ancestral_lineage_endpoint": "POST https://gateway-s2-blo.eci.gov.in/api/v1/elastic-sir/get-eroll-data-2003",
-    "statutory_reconciliation_model": "Derived Rule 56C SQL Automated Verification"
+    "total_confirmed_findings": 29,
+    "finding_27_status": "CONFIRMED (ecinet_chunk_8556.js Offset 36,442 - 2003 Ancestral Lineage)",
+    "finding_28_status": "CONFIRMED (ecinet_main_unescaped.js Offsets 1,260,136-1,260,656 - S3 Object Store)",
+    "finding_29_status": "CONFIRMED (ecinet_chunk_9226.js Offsets 28,789 & 29,453 - Progeny >= 6 Demographic Profiling & WB 9.45M Hardcoded Baseline)",
+    "supreme_court_precedents": [
+      "ADR v. ECI (May 27, 2026) - Upheld 11/12-doc public SOP; undisclosed algorithmic filters fall outside record",
+      "Arjun Panditrao Khotkar (2020) 7 SCC 1 - Mandatory Section 65B/63 custodian certificate impossible on mutable S3",
+      "Shayara Bano (2017) 9 SCC 1 - Article 14 Manifest Arbitrariness of family size classification",
+      "Lt Col Nitisha (2021) 4 SCC 560 - Indirect Discrimination / Disparate Impact under Articles 14 & 15(1)"
+    ]
   },
   "battalions": {
     "B01_surface_recon": {
@@ -64,8 +67,8 @@
       "statutory_rules": [
         "CER 1961 Rule 49L (Form 17A ABSENT)",
         "CER 1961 Rule 49S/56C (Form 17C SEVERED)",
-        "Aadhaar Act s.29 (Form 6 PII LEAKED)",
-        "RPA 1950 s.22/23 (Automated Form 7 Deletion)"
+        "CER 1961 Rules 92, 93(1)(dd), 94 (Digital Custody)",
+        "RPA 1950 ss.16, 19, 21(3), 22, 23 (Disqualifications & Deletions)"
       ]
     },
     "B05_demographic_bigdata": {
@@ -75,8 +78,10 @@
       "status": "ALL_UNITS_ACTIVE",
       "records_indexed": 9449132,
       "profiling_rules": [
-        "Progeny >= 6",
-        "2003 Ancestral Voter Matching"
+        "Progeny >= 6 (progLimitExceed)",
+        "Father Name Mismatch (parentNameMismatch)",
+        "Parent Age Diff <15 / >50",
+        "Grandparent Age Diff <40"
       ]
     },
     "B06_adversarial_verification": {
@@ -84,7 +89,7 @@
       "active_units": 10,
       "agents_range": "051-060",
       "status": "ALL_UNITS_ACTIVE",
-      "false_positives_filtered": 58,
+      "false_positives_filtered": 64,
       "confidence_rating": 0.99
     },
     "B07_storm_debate": {
@@ -92,7 +97,7 @@
       "active_units": 10,
       "agents_range": "061-070",
       "status": "ALL_UNITS_ACTIVE",
-      "perspectives_debated": 12
+      "perspectives_debated": 15
     },
     "B08_software_engineering": {
       "battalion_id": "B08-SOFTWARE-ENGINEERING",
@@ -112,7 +117,7 @@
       "active_units": 10,
       "agents_range": "081-090",
       "status": "ALL_UNITS_ACTIVE",
-      "memory_ledger": "definitive_dossier_sync_20261102",
+      "memory_ledger": "finding_29_adr_sync_20261102",
       "git_trace_hash": "sha256-consensus-verified"
     },
     "B10_executive_dispatch": {
@@ -124,6 +129,6 @@
       "lead_marshal": "Hermes-Master"
     }
   },
-  "confirmed_smoking_guns": 26,
-  "fleet_consensus_verdict": "DEFINITIVE_DOSSIER_SYNCHRONIZED_100_AGENTS_ENGAGED"
+  "confirmed_smoking_guns": 29,
+  "fleet_consensus_verdict": "FINDING_29_SYNCHRONIZED_100_AGENTS_ENGAGED"
 }
