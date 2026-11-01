@@ -32,11 +32,11 @@
 - **Rule 92 (Conduct of Elections Rules, 1961):** Primary custody provision mandating that election packets remain in safe custody of the District Election Officer.
 - **Rule 93 (Production & Inspection):** Governs inspection once in custody. Form 17A registers fall under Rule 93(1)(dd), strictly requiring a competent court order (*Ram Sewak Yadav v. Hussain Kamil Kidwai*, *Hari Ram v. Hira Singh*).
 - **Rule 94 (Disposal):** Sets mandatory retention periods.
-- **The Technical Audit Fact:** Under Section 100(1)(d) RPA 1951, the legally defensible finding is that **in the absence of an append-only cryptographic hash log, the custody integrity of digital records stored in mutable flat object storage cannot be independently verified**.
+- **The Evidentiary Barrier (Section 65B IEA / Section 63 BSA 2023):** In *Arjun Panditrao Khotkar v. Kailash Kushanrao Gorantyal (2020) 7 SCC 1*, the Supreme Court held that electronic records are admissible only with a custodian certificate proving security against unauthorized alteration. Storing records in mutable S3 storage without an immutable hash chain prevents the custodian from certifying that records were protected against alteration.
 
 ### B. Defensive RFC 6962-Style Merkle Transparency Architecture
 1. **Content-Addressing at Submission:** Every Form 17A/17C record is SHA-256 hashed immediately upon finalization.
-2. **Append-Only Merkle Log (RFC 6962):** Each hash becomes a leaf in an append-only tree.
+2. **Append-Only Merkle Log (RFC 6962 / Trillian):** `Leaf = SHA-256(0x00 || PayloadDigest || SignatureBytes)`.
 3. **Multi-Party Signed Tree Heads (STHs):** Periodic STHs published to independent, mutually distrusting parties (party BLAs, court registry, press pool).
 4. **Co-Signing at Creation:** Presiding officer and polling agents sign the leaf hash prior to insertion.
 
@@ -82,7 +82,25 @@
 
 ---
 
-## 6. Microservice Inventory Summary (251 Endpoints / 36 Services)
+## 6. Finding #29: The Undisclosed Demographic & Genealogical Profiling Engine
+- **Exact File:** `ecinet_chunk_9226.js`
+- **Exact Byte Offsets:** `28,789` & `29,453`
+- **Hardcoded State Baseline:** `children: ["Electors with Discrepancies - ", ("West Bengal" == Tl && bo ? 9449132 : mo?.anomalyCount)]` (Offset 28,789)
+- **The 5 Genealogical Anomaly Variables (Offset 29,453):**
+  1. `progLimitExceed`: `"Progeny >= 6"`
+  2. `parentNameMismatch`: `"Father Name Mismatch"`
+  3. `parentAgeLt15`: `"Parent Age Difference <15"`
+  4. `parentAgeGt50`: `"Parent Age difference >50"`
+  5. `gparentAgeLt40`: `"Grandparent Age difference <40"`
+- **Statutory & Constitutional Ground:**
+  - *Lack of Statutory Authority:* Sections 16 & 19 RPA 1950 do not authorize family size or biological age differentials as voter eligibility criteria.
+  - *Outside the ADR v. ECI (May 2026) Record:* The Supreme Court upheld the ECI's general SIR authority based on the public 11/12-document SOP; these internal algorithmic filters were never disclosed to the Court.
+  - *Manifest Arbitrariness (Article 14, Shayara Bano):* Executive classification on family size lacks a rational nexus to residency or citizenship.
+  - *Disparate Impact (Articles 14 & 15(1), Lt Col Nitisha):* Disproportionately burdens specific demographic cohorts without statutory justification.
+
+---
+
+## 7. Microservice Inventory Summary (251 Endpoints / 36 Services)
 - `user-management`: 69 endpoints (role mapping, disable officer, Keycloak assign)
 - `druid` & analytics: 28 endpoints (logical discrepancies, BLA pendency, enum tracking)
 - `vendor`: 14 endpoints (vendor onboarding, printing export, disable vendor)
