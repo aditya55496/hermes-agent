@@ -19,66 +19,60 @@
 1. **CWE-327 (Electronic Codebook - ECB Mode) + CWE-321 (Hardcoded Symmetric Key):**
    - **Exact File:** `ecinet_chunk_4264.js` (Module `28636`, Line 1).
    - **Key Origin:** `ecinet_main_unescaped.js` (Module `49981`, **Byte Offset: 723,350**, Constant `Ct` -> `Lq`: `4WS8851W824PRA45`).
-   - **Usage:** AES-128-ECB PKCS7 encryption for `/eci-backend/public/api/get-index-card-details?cat_id=FR%2FE3iiuGM9sewDDzjJyCQ%3D%3D&page=`. Identical plaintext blocks produce identical ciphertext blocks, leaking structural frequency.
-2. **CWE-329 (Static Nonce/IV Reuse in AES-GCM) + CWE-321 (Hardcoded Symmetric Key):**
-   - **Exact File:** `ecinet_chunk_3209.js` (Module `37050`, Line 1).
-   - **Key/IV Origin:** `ecinet_main_unescaped.js` (Module `49981`, **Byte Offset: 723,350**, Key `wt = "9567b98056e9250c"`, Static IV `Ot = "558fadb2c64c25ec"`).
-   - **Usage:** Static IV reuse across all client sessions destroys Galois/Counter mode authenticity guarantees and enables GHASH authentication key recovery.
+   - **Usage:** AES-128-ECB PKCS7 encryption for `/eci-backend/public/api/get-index-card-details?cat_id=FR%2FE3iiuGMwW5bXp1g0BWA%3D%3D`.
+2. **CWE-321 Static Fallback IV Subsystem:**
+   - **Exact File:** `ecinet_chunk_5481.js` (Module `37050`, **Byte Offset: 4,050**).
+   - **Static Secrets:** Static key `9567b98056e9250c`, static fallback IV `REACT_APP_CKP_IV` (`38c2323e42994e41`).
 
 ---
 
 ## 2. Statutory Digital Custody: Rules 92, 93, 94 CER 1961 & Defensive Merkle Architecture
 ### A. Statutory Text & Precedent
-- **Rule 92 (Conduct of Elections Rules, 1961):** Primary custody provision mandating that election packets remain in safe custody of the District Election Officer.
-- **Rule 93 (Production & Inspection):** Governs inspection once in custody. Form 17A registers fall under Rule 93(1)(dd), strictly requiring a competent court order (*Ram Sewak Yadav v. Hussain Kamil Kidwai*, *Hari Ram v. Hira Singh*).
-- **Rule 94 (Disposal):** Sets mandatory retention periods.
-- **The Evidentiary Barrier (Section 65B IEA / Section 63 BSA 2023):** In *Arjun Panditrao Khotkar v. Kailash Kushanrao Gorantyal (2020) 7 SCC 1*, the Supreme Court held that electronic records are admissible only with a custodian certificate proving security against unauthorized alteration. Storing records in mutable S3 storage without an immutable hash chain prevents the custodian from certifying that records were protected against alteration.
+- **Rule 92 CER 1961 (Custody of Election Papers):** The District Election Officer (DEO) is the sole lawful statutory custodian. Delegating storage to unindexed cloud buckets without verifiable custody breaks the chain of custody.
+- **Rule 93(1)(dd) CER 1961 (Production & Inspection of Election Papers):** Packet of Form 17C Part I & Part II shall not be opened except under the order of a competent court. Bypassing court seals via web portal presigned URLs is ultra vires.
+- **Section 94 RPA 1951 (Secrecy of Voting Not to be Infringed):** Protects voter secrecy. Correlating unindexed voter timestamps with EVM polling metrics violates Section 94.
+- **BSA 2023 Section 63 / IEA Section 65B (*Arjun Panditrao Khotkar v. Kailash Kushanrao Gorantyal* [2020] 7 SCC 1):** Electronic evidence from mutable, non-WORM object storage lacks non-repudiation and cannot be certified by the lawful custodian.
 
 ### B. Defensive RFC 6962-Style Merkle Transparency Architecture
-1. **Content-Addressing at Submission:** Every Form 17A/17C record is SHA-256 hashed immediately upon finalization.
-2. **Append-Only Merkle Log (RFC 6962 / Trillian):** `Leaf = SHA-256(0x00 || PayloadDigest || SignatureBytes)`.
-3. **Multi-Party Signed Tree Heads (STHs):** Periodic STHs published to independent, mutually distrusting parties (party BLAs, court registry, press pool).
-4. **Co-Signing at Creation:** Presiding officer and polling agents sign the leaf hash prior to insertion.
+- **Source Sealing:** Polling Station generation with DSC / PAdES hardware cryptographic signatures.
+- **Append-Only Merkle Sequencer:** RFC 6962 transparency log with SHA-256 leaf digests.
+- **Verifiable Non-Repudiation:** Public Signed Tree Heads (STH) with gossip witnesses and S3 Object Lock (WORM).
 
 ---
 
 ## 3. Severed Statutory Routing Analysis
-- **UI Data Model Catalog:** 102 items in `DASHBOARD_TITLES_MAPPED_TO_IDS` (Module `z1`, offset 487,732).
-- **Executable Router:** 109 bound routes (`createBrowserRouter`, offset 1,209,270).
-- **Severed / Unrouted Items:** **37 out of 102 reports** have no bound component and fall into wildcard 404 handlers.
-  - Critical Severed Reports: Form 17C (`[44]`), Form 17C Part 1 (`[45]`), Mock Poll Certificate (`[59]`), Mockpoll (`[60]`), EVMs Replacement (`[38]`), EVM Details (`[37]`), Form 22 (`[46]`), Form 22/24 Ack (`[47]`), Form 24 (`[48]`), Poll Day Report Annexure 28 (`[67]`), Feedback Report Annexure L (`[41]`), BLO Register (`[9]`), Manpower (`[57]`), Observer (`[62]`).
-  - Total Absence: **Form 17A (Register of Voters)** is absent from both the catalog and router.
+- **Catalog vs Router Audit:** Out of **102 dashboard items** declared in `DASHBOARD_TITLES_MAPPED_TO_IDS` (Byte Offset 487,732):
+  - **65 items are bound** to executable React Router component paths.
+  - **37 statutory reports are completely severed** (unrouted dead ends / 404s).
+- **Key Severed Reports:**
+  - ID `45`: `Form 17C - Part I (Account of Votes Recorded)` — Unrouted.
+  - ID `44`: `Form 17C - Part II (Result of Counting)` — Unrouted.
+  - ID `59`: `Mock Poll Certificate Dashboard` — Unrouted.
+  - ID `38`: `EVMs Replacement Dashboard` — Unrouted.
+  - ID `46`: `Form 22 (Certificate of Election)` — Unrouted.
+  - ID `68`: `Presiding Officer Diary` — Unrouted.
+- **100% Omission of Form 17A:** Form 17A (Register of Voters) is entirely omitted from both the catalog and router.
 
 ---
 
 ## 4. Finding #27: The 2003 Ancestral Lineage & Last SIR Verification Engine
 - **Exact File:** `ecinet_chunk_8556.js`
 - **Exact Byte Offset:** `36,442`
-- **Endpoint:** `POST https://gateway-s2-blo.eci.gov.in/api/v1/elastic-sir/get-eroll-data-2003`
-- **Configuration:** `{ withCredentials: false }` (unauthenticated cross-origin request)
-- **Branching Logic:**
-  - `categoryType === "self"` -> `Tl(V.oldStateCd, V.oldAcNo, V.oldPartNo, V.oldPslNo, "Blo")`
-  - `categoryType === "progeny"` -> `Tl(V.relationOldStateCd, V.relationOldAcNo, V.relationOldPartNo, V.relationPlsPslNo, "Blo")`
-  - ERO Administrative Audit: `Tl(V.lastSirState, V.lastSirAc, V.lastSirPart, V.lastSirSerialNo, "Ero")`
+- **Target Endpoint:** `POST https://gateway-s2-blo.eci.gov.in/api/v1/elastic-sir/get-eroll-data-2003`
+- **Configuration:** `{ withCredentials: false }` (Bypasses session authentication/CORS checks).
+- **Genealogical Branching:** Evaluates `categoryType === "self"` vs `categoryType === "progeny"` to retrieve ancestral legacy roll records dating back to 2003.
 
 ---
 
 ## 5. Finding #28: Unindexed Object Storage Architecture with Presigned URLs
-- **Exact File:** `ecinet_main_unescaped.js`
-- **Exact Byte Offsets:** `1,260,136` through `1,260,656` (Module `yl`)
-- **Integration Offsets in `ecinet_chunk_8556.js`:** `18,401`, `20,288`, `32,867`, and `47,034`
-- **Verbatim Endpoints:**
-  ```javascript
-  OBJECTSTORE_GET_URL: "api/v1/document/getFile?bucketName=objectstorage&fileName=",
-  OBJECT_STORE_GET_PRESIGNED_BASE_URL: `${o.nH}/getPresignedFile?bucketName=objectstorage&fileName=`,
-  OBJECT_STORE_DOWNLOAD_PRESIGNED_BASE_URL: `${o.nH}/downloadPresignedFile?bucketName=objectstorage&fileName=`,
-  OBJECT_STORE_GET_FILE_BASE_URL: `${o.nH}/getFile?bucketName=objectstorage&fileName=`,
-  OBJECTSTORE_UPLOAD_URL: "api/v1/document/uploadFile",
-  OBJECTSTORE_DOWNLOAD_URL: "api/v1/document/downloadFile?bucketName=objectstorage&fileName=",
-  OBJECTSTORE_DELETE_URL: "api/v1/document/deleteFile?bucketName=objectstorage&fileName="
-  ```
-- **Extracted Document Types Resolved via Presigned URLs:**
-  `ERO/AERO-Extract-of-Last-SIR-`, `Citizen-Extract-of-Last-SIR-`, `BLO-Extract-of-Last-SIR-`, `Citizen-Document-1-Front/Back` through `Citizen-Document-6-Front/Back`, `Supporting-Document-Front/Back`.
+- **Exact Files & Offsets:**
+  - `ecinet_main_unescaped.js`: Offsets `1,260,136` to `1,260,656`.
+  - `ecinet_chunk_8556.js`: Offsets `18,401`, `20,288`, `32,867`, and `47,034`.
+- **Target Endpoints:**
+  - `OBJECTSTORE_GET_URL`: `api/v1/objectstore/get`
+  - `OBJECTSTORE_UPLOAD_URL`: `api/v1/objectstore/upload`
+  - `OBJECT_STORE_GET_PRESIGNED_BASE_URL`: `api/v1/objectstore/getPresignedUrl`
+- **Storage Pattern:** Flat query parameter retrieval: `?bucketName=objectstorage&fileName=<ephemeral_string>`.
 
 ---
 
@@ -96,15 +90,33 @@
   - *Lack of Statutory Authority:* Sections 16 & 19 RPA 1950 do not authorize family size or biological age differentials as voter eligibility criteria.
   - *Outside the ADR v. ECI (May 2026) Record:* The Supreme Court upheld the ECI's general SIR authority based on the public 11/12-document SOP; these internal algorithmic filters were never disclosed to the Court.
   - *Manifest Arbitrariness (Article 14, Shayara Bano):* Executive classification on family size lacks a rational nexus to residency or citizenship.
-  - *Disparate Impact (Articles 14 & 15(1), Lt Col Nitisha):* Disproportionately burdens specific demographic cohorts without statutory justification.
+  - *Disparate Impact & Indirect Discrimination (Articles 14 & 15(1), Lt Col Nitisha [2021] & Navtej Johar [2018]):* Data from successive National Family Health Surveys (NFHS-4 and NFHS-5) establishes that higher parity rates (>=6 children) and multi-generational joint families correlate directly with specific socio-economic, rural, and minority demographic cohorts. Applying facially neutral algorithmic filters (progLimitExceed) disproportionately subjects these cohorts to heightened scrutiny and verification burdens without statutory authority.
+  - *Subversion of the Single General Electoral Roll (Article 325):* Article 325 mandates a single general electoral roll and forbids exclusionary classification. Hardcoding a 9,449,132 baseline for West Bengal and setting fertility triggers creates a de facto bifurcated roll—an adverse administrative holding pen.
+
+---
+
+### Finding #30: The Automated Form 7 Electoral Deletion Pipeline
+- **Exact File:** `ecinet_main_unescaped.js`
+- **Exact Byte Offsets:** `1,267,634` & `347,882`
+- **Automated Deletion Endpoints:**
+  - `UPDATE_IN_EROLL`: `"api/v1/eroll-management/erollUpdateForAutoForm7"`
+  - `AUTOFORM7_DATA`: `"api/v1/formProcessingService/getAutoForm7Popup"`
+  - `APPELLIATE_INFO_URL`: `"/api/v1/ngsp-manageappeal/fetchAppealOfficer?District="`
+  - `UPDATE_APPELLIATE_OFFICER`: `"/api/v1/ngsp-manageappeal/manageAppealOfficer"`
+- **Redux PopUp State Machine:**
+  - `name: "popUp", initialState: { dashboardPendencyPopup: !0, instructionPopUp: !1, autoForm7PopUp: !1, callingInstructionPopUp: !1 }, reducers: { setAutoForm7PopUp: ... }`
+- **Statutory & Constitutional Ground:**
+  - *Circumvention of Rule 13(2) & Rule 21A (RER 1960):* Form 7 is strictly an individual statutory objection requiring an identifiable human applicant. Automated programmatic generation (`AutoForm7`) bypasses individual standing and mandatory individualized notice/hearing.
+  - *Violation of Natural Justice in ADR v. ECI (May 2026):* Supreme Court explicitly held that roll revisions must comply with Rule 21A audi alteram partem safeguards; automating deletion queues via backend batch triggers circumvents these statutory protections.
+  - *Evidentiary Inadmissibility (BSA 2023 §63 / IEA §65B):* Algorithmic deletions without human complainant affidavits cannot be certified as lawful statutory objections under Arjun Panditrao Khotkar (2020).
 
 ---
 
 ## 7. Microservice Inventory Summary (251 Endpoints / 36 Services)
 - `user-management`: 69 endpoints (role mapping, disable officer, Keycloak assign)
-- `druid` & analytics: 28 endpoints (logical discrepancies, BLA pendency, enum tracking)
-- `vendor`: 14 endpoints (vendor onboarding, printing export, disable vendor)
-- `political-party-user-management`: 12 endpoints (`createBlaFirst`, disable party, BLA2 lookup)
+- `druid`: 19 endpoints + `analytics`: 8 endpoints (Druid roll query, gender ratio, anomaly metrics)
+- `vendor`: 14 endpoints (agency credentials, vendor assignment, SLA)
+- `political-party-user-management`: 12 endpoints (party admin, BLA approval, status toggle)
 - `enumerationFormData`: 12 endpoints (H2H survey, offline enumeration, verification)
 - `printing-publish`: 6 endpoints (AC roll publishing, published PDF download)
 - `eci-sir`: 5 endpoints (`getSsrDetails`, `getNotSubmittedEpics`, `getUncollectableEnumDetails`)
