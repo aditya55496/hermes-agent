@@ -8,7 +8,7 @@ on:
         required: true
         default: 'doctor'
       provider:
-        description: 'LLM Provider (e.g., openrouter, fireworks, gemini, nous)'
+        description: 'LLM Provider'
         required: false
         default: 'openrouter'
 
@@ -34,12 +34,26 @@ jobs:
           curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
           echo "$HOME/.hermes/bin" >> $GITHUB_PATH
 
-      - name: Execute Hermes Command
+      - name: Preconfigure Hermes OpenRouter Model
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          mkdir -p $HOME/.hermes
+          cat << EOF > $HOME/.hermes/.env
+          OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+          EOF
+          cat << EOF > $HOME/.hermes/config.yaml
+          model:
+            provider: openrouter
+            default: anthropic/claude-3.7-sonnet
+          terminal:
+            backend: local
+          EOF
+
+      - name: Execute Task via Hermes Agent
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           export PATH="$HOME/.hermes/bin:$PATH"
-          echo "Running Hermes with input: ${{ github.event.inputs.command }}"
-          hermes ${{ github.event.inputs.command }}
+          echo "=== Executing Hermes Cloud Task ==="
+          hermes ${{ github.event.inputs.command }} || true
