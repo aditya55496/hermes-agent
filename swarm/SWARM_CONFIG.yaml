@@ -1,148 +1,190 @@
-# Full 25-Agent Master Forensic & Autonomous Swarm Fleet
-# Ecosystem Integration: Premier Hackathon Winners & Industry Standard Frameworks (@aditya55496)
+# 100-Agent Century Swarm Specification (10 Battalions x 10 Specialized Units)
+# Autonomous Multi-Agent Forensic & Intelligence Fleet (@aditya55496)
 
-version: "4.0"
-swarm_name: "ECINet Master Forensic Swarm Fleet (25-Agent Full Fleet)"
-lead_orchestrator:
-  agent_id: "hermes-master-orchestrator"
-  repo: "aditya55496/hermes-agent"
-  role: "Chief Multi-Agent Commander & Consensus Engine"
+version: "5.0-CENTURY"
+swarm_name: "ECINet 100-Agent Master Autonomous Century Fleet"
+fleet_size: 100
+command_structure:
+  orchestrator: "hermes-master-orchestrator"
+  architecture: "Hierarchical Multi-Battalion Consensus Swarm"
 
-phases:
+battalions:
   # =========================================================================
-  # PHASE 1: INGESTION, RECONNAISSANCE & ARCHIVING
+  # BATTALION 1: SURFACE RECONNAISSANCE & INGESTION (Agents 01-10)
   # =========================================================================
-  - phase_id: "phase-1-recon"
-    name: "Autonomous Surface Crawling & Immutable Archiving"
+  - battalion_id: "B01-SURFACE-RECON"
+    name: "Perimeter Surface & Ingestion Battalion"
+    repo_backing: ["aditya55496/crawl4ai", "aditya55496/katana"]
     agents:
-      - agent_id: "agent-crawl4ai"
-        name: "Dynamic JS Ingestion Agent"
-        repo: "aditya55496/crawl4ai"
-        role: "Headless JS-rendered DOM navigation & dynamic API endpoint discovery"
-      - agent_id: "agent-katana"
-        name: "SPA Deep Surface Crawler"
-        repo: "aditya55496/katana"
-        role: "High-throughput crawling across Single Page Application routes"
-      - agent_id: "agent-linkfinder"
-        name: "Endpoint Regex Miner"
-        repo: "aditya55496/LinkFinder"
-        role: "Deep endpoint and query parameter extraction from raw JS bundles"
-      - agent_id: "agent-archivebox"
-        name: "Tamper-Proof Archival Sentinel"
-        repo: "aditya55496/ArchiveBox"
-        role: "Immutable cryptographic snapshotting of changing portals and gazettes"
+      - id: "agent-001"; name: "ECINet Root DOM Observer"; role: "Tracks ecinet.eci.gov.in homepage changes"
+      - id: "agent-002"; name: "Meta BuildDate Sentinel"; role: "Continuous polling of /meta.json for build timestamp drift"
+      - id: "agent-003"; name: "Gateway Officials Watcher"; role: "Monitors gateway-officials.eci.gov.in header and auth states"
+      - id: "agent-004"; name: "Electoral Search Surface Scout"; role: "Probes electoralsearch.eci.gov.in WAF and subpaths"
+      - id: "agent-005"; name: "VSP Portal Sentinel"; role: "Tracks voters.eci.gov.in perimeter changes"
+      - id: "agent-006"; name: "SPA Client Route Crawler"; role: "Katana headless route crawling on client Single Page Apps"
+      - id: "agent-007"; name: "Static Asset Hash Verifier"; role: "SHA-256 fingerprinting of images, fonts, and svg assets"
+      - id: "agent-008"; name: "CDN Edge Cache Watcher"; role: "Tracks CDN edge server response headers and age"
+      - id: "agent-009"; name: "Subdomain Enumerator"; role: "Monitors *.eci.gov.in DNS and SAN certificate transparency"
+      - id: "agent-010"; name: "Immutable Snapshot Committer"; role: "ArchiveBox cryptographic snapshots of changing portal manifests"
 
   # =========================================================================
-  # PHASE 2: STRUCTURAL DEOBFUSCATION, AST PARSING & SEMANTIC ANALYSIS
+  # BATTALION 2: AST DEOBFUSCATION & CODE EXTRACTION (Agents 11-20)
   # =========================================================================
-  - phase_id: "phase-2-deobfuscation"
-    name: "Structural AST Code Extraction & Semantic Code Analysis"
+  - battalion_id: "B02-AST-DEOBFUSCATION"
+    name: "AST Parsing & Code Deobfuscation Battalion"
+    repo_backing: ["aditya55496/webcrack", "aditya55496/jsluice", "aditya55496/ast-grep"]
     agents:
-      - agent_id: "agent-webcrack"
-        name: "Webpack Deobfuscator & Unpacker"
-        repo: "aditya55496/webcrack"
-        role: "Unpacks, un-minifies, and deobfuscates production Webpack bundles"
-      - agent_id: "agent-jsluice"
-        name: "AST Syntax Tree Route Extractor"
-        repo: "aditya55496/jsluice"
-        role: "AST-based extraction of hidden URLs, REST routes, and internal endpoints"
-      - agent_id: "agent-ast-grep"
-        name: "Structural Syntax Query Engine"
-        repo: "aditya55496/ast-grep"
-        role: "AST code search across minified trees for crypto keys and route tables"
-      - agent_id: "agent-semgrep"
-        name: "Semantic Vulnerability & Pattern Auditor (11k★)"
-        repo: "aditya55496/semgrep"
-        role: "Deep semantic pattern matching for hardcoded credentials, insecure routes, and statutory gaps"
+      - id: "agent-011"; name: "Webpack Main Bundle Unpacker"; role: "Unpacks Webpack runtime and module registry"
+      - id: "agent-012"; name: "Chunk 8556 Deep AST Extractor"; role: "Parses SSR document and AI verification schemas"
+      - id: "agent-013"; name: "Chunk 9226 AST Extractor"; role: "Parses uncollectable reason codes and tracking APIs"
+      - id: "agent-014"; name: "Chunk 4361 AST Extractor"; role: "Parses progeny mapping and Druid Excel report routes"
+      - id: "agent-015"; name: "Chunk 3087 Form 6 Schema Miner"; role: "Inspects Form 6 applicant fields and document links"
+      - id: "agent-016"; name: "Chunk 5099 Form Tally Extractor"; role: "Extracts multi-platform submission counters (Garuda, NVSP)"
+      - id: "agent-017"; name: "Module 73789 Constants Scout"; role: "Monitors internal constants table for hidden routing URLs"
+      - id: "agent-018"; name: "Dead Code & Unrouted Path Detector"; role: "Identifies unlinked routes such as /bh_2003_eroll"
+      - id: "agent-019"; name: "Variable Demangling Engine"; role: "Reconstructs minified function names from AST patterns"
+      - id: "agent-020"; name: "Structural ast-grep Query Runner"; role: "Executes AST search rules for URL constant assignments"
 
   # =========================================================================
-  # PHASE 3: FORENSIC RUNTIME & SECRET AUDITING
+  # BATTALION 3: CRYPTOGRAPHIC & CREDENTIAL FORENSICS (Agents 21-30)
   # =========================================================================
-  - phase_id: "phase-3-forensics"
-    name: "Forensic Evidence Categorization & Vulnerability Auditing"
+  - battalion_id: "B03-CRYPTO-FORENSICS"
+    name: "Cryptographic & Credential Auditing Battalion"
+    repo_backing: ["aditya55496/trufflehog", "aditya55496/rea", "aditya55496/semgrep"]
     agents:
-      - agent_id: "agent-rea"
-        name: "Reverse Engineering & Evidence Tagger"
-        repo: "aditya55496/rea"
-        role: "Structured API/runtime inspection with strict tagging (Confirmed, Plausible, Unknown)"
-      - agent_id: "agent-trufflehog"
-        name: "Secret & Credential Scanner"
-        repo: "aditya55496/trufflehog"
-        role: "Deep credential, token, and API key sniffing across code trees"
-      - agent_id: "agent-nuclei"
-        name: "Irregularity & Anomaly Rule Scanner"
-        repo: "aditya55496/nuclei"
-        role: "DSL template execution for misconfigurations and exposed sensitive paths"
-      - agent_id: "agent-cloudflare-audit"
-        name: "Adversarial Verification Gate"
-        repo: "aditya55496/security-audit-skill"
-        role: "Multi-phase adversarial verification to eliminate false positives and UI noise"
+      - id: "agent-021"; name: "High-Entropy Secret Sniffer"; role: "Detects Base64 and hex strings with entropy > 4.5"
+      - id: "agent-022"; name: "Symmetric AES Key Auditor"; role: "Tracks static keys such as 4WS8851W824PRA45 and CKP key"
+      - id: "agent-023"; name: "ECB Mode Vulnerability Checker"; role: "Identifies insecure AES-ECB block cipher instantiations"
+      - id: "agent-024"; name: "Static IV Reuse Detector"; role: "Flags static initialization vectors in election result decoding"
+      - id: "agent-025"; name: "Master ENCORE Token Auditor"; role: "Verifies m.pc master credentials across builds"
+      - id: "agent-026"; name: "SIR S2UA4DPDF Token Sentinel"; role: "Audits hardcoded revision bypass tokens"
+      - id: "agent-027"; name: "Client-Side CAPTCHA Decryption Auditor"; role: "Monitors AES-decrypt logic in browser login flows"
+      - id: "agent-028"; name: "Keycloak Role JWT Analyzer"; role: "Inspects token claims and BLO-to-Admin privilege escalation"
+      - id: "agent-029"; name: "Hardcoded Passwords & Salts Finder"; role: "Scans for hardcoded credential defaults in bundles"
+      - id: "agent-030"; name: "TruffleHog Git History Verifier"; role: "Cross-checks commit tree for revoked and leaking secrets"
 
   # =========================================================================
-  # PHASE 4: BIG DATA, DEMOGRAPHIC & OSINT ANALYSIS
+  # BATTALION 4: STATUTORY INTEGRITY AUDITING (Agents 31-40)
   # =========================================================================
-  - phase_id: "phase-4-bigdata"
-    name: "Demographic Records & Threat Intelligence Analysis"
+  - battalion_id: "B04-STATUTORY-AUDIT"
+    name: "Statutory & Election Regulatory Compliance Battalion"
+    repo_backing: ["aditya55496/rea", "aditya55496/security-audit-skill"]
     agents:
-      - agent_id: "agent-polars"
-        name: "Ultra-Fast Record Processing Engine"
-        repo: "aditya55496/polars"
-        role: "High-performance processing of voter statistics and anomaly logs"
-      - agent_id: "agent-datasette"
-        name: "SQL Demographic Roll Dissector"
-        repo: "aditya55496/datasette"
-        role: "Interactive SQL exploration of electoral rolls and demographic subsets"
-      - agent_id: "agent-spiderfoot"
-        name: "OSINT Threat & Infrastructure Recon"
-        repo: "aditya55496/spiderfoot"
-        role: "Infrastructure and network reconnaissance across public endpoints"
+      - id: "agent-031"; name: "Form 17A Legal Integrity Auditor"; role: "Checks for absence of statutory Register of Voters (Rule 49L)"
+      - id: "agent-032"; name: "Form 17C Ballot Account Auditor"; role: "Audits severed public reports (IDs 44/45 under Rule 49S/56C)"
+      - id: "agent-033"; name: "Form 6 PII & Aadhaar Auditor"; role: "Monitors cleartext applicant data leaks under Aadhaar Act s.29"
+      - id: "agent-034"; name: "Form 7 Automated Deletion Auditor"; role: "Evaluates erollUpdateForAutoForm7 against RPA 1950 s.85"
+      - id: "agent-035"; name: "Form 8 Voter Correction Auditor"; role: "Analyzes shifting and replacement EPIC API parameters"
+      - id: "agent-036"; name: "Form 6B Aadhaar Authentication Auditor"; role: "Audits voluntary Aadhaar linking confidentiality"
+      - id: "agent-037"; name: "Mock Poll Compliance Auditor"; role: "Audits severed statutory mock poll certificates (Report ID 59)"
+      - id: "agent-038"; name: "Rule 21A Ancestral Citizenship Auditor"; role: "Checks ctzver pre-1987 parent card demands"
+      - id: "agent-039"; name: "Appellate Judge Swapping Auditor"; role: "Audits software-driven appeal officer reassignment"
+      - id: "agent-040"; name: "Single Electoral Roll Mandate Auditor"; role: "Checks VIP Gold classifications against Constitution Article 325"
 
   # =========================================================================
-  # PHASE 5: ELITE MULTI-AGENT COLLABORATION, ROLE-PLAYING & SOFTWARE ENGINEERING
+  # BATTALION 5: DEMOGRAPHIC & BIG DATA RECON (Agents 41-50)
   # =========================================================================
-  - phase_id: "phase-5-elite-agents"
-    name: "Hackathon-Winning Multi-Agent Frameworks & Collaborative Intelligence"
+  - battalion_id: "B05-DEMOGRAPHIC-BIGDATA"
+    name: "Demographic Records & Big Data Battalion"
+    repo_backing: ["aditya55496/polars", "aditya55496/datasette"]
     agents:
-      - agent_id: "agent-metagpt"
-        name: "MetaGPT SOP Multi-Role Enterprise (53k★)"
-        repo: "aditya55496/MetaGPT"
-        role: "Standard Operating Procedure multi-agent role-play: Architect, Reviewer, Engineer, QA"
-      - agent_id: "agent-crewai"
-        name: "CrewAI Autonomous Task Fleet (28k★)"
-        repo: "aditya55496/crewAI"
-        role: "Hierarchical multi-agent crew execution with automated task delegation"
-      - agent_id: "agent-chatdev"
-        name: "ChatDev Virtual Multi-Agent Company (26k★)"
-        repo: "aditya55496/ChatDev"
-        role: "Communicative agent assembly line validating code and documentation integrity"
-      - agent_id: "agent-swe-agent"
-        name: "Princeton SWE-Agent Bug Resolver (16k★)"
-        repo: "aditya55496/SWE-agent"
-        role: "Autonomous code navigation and issue analysis benchmarked on SWE-bench"
+      - id: "agent-041"; name: "Polars 9.45M WB Over-Ride Processor"; role: "Parses West Bengal discrepancy electoral records"
+      - id: "agent-042"; name: "Progeny >= 6 Demographic Filter"; role: "Audits demographic profiling flags for 6+ child families"
+      - id: "agent-043"; name: "Uncollectable Elector Reason Mapper"; role: "Aggregates Permanently Shifted, Expired, and Not Moved counts"
+      - id: "agent-044"; name: "Age Cohort Discrepancy Analyzer"; role: "Detects age-incongruent voter clusters across polling stations"
+      - id: "agent-045"; name: "Household Density Profiler"; role: "Identifies abnormal voter counts registered to single door numbers"
+      - id: "agent-046"; name: "Datasette SQL Table Builder"; role: "Compiles structured SQL tables of published draft roll diffs"
+      - id: "agent-047"; name: "Gender Ratio Anomaly Detector"; role: "Calculates sex ratio deviations from census baselines by booth"
+      - id: "agent-048"; name: "Duplicate EPIC Card Searcher"; role: "Cross-checks national display API for duplicate voter ID numbers"
+      - id: "agent-049"; name: "Turnout Telemetry Stream Auditor"; role: "Monitors vendor /tcs/ polling-day voter turnout telemetry"
+      - id: "agent-050"; name: "Druid Year 2100 Embargo Checker"; role: "Audits temporal bypass queries in Druid endpoints"
 
   # =========================================================================
-  # PHASE 6: REASONING AMPLIFICATION, MEMORY & SYNTHESIS
+  # BATTALION 6: ADVERSARIAL VERIFICATION & NOISE FILTER (Agents 51-60)
   # =========================================================================
-  - phase_id: "phase-6-synthesis"
-    name: "Multi-Perspective Synthesis, Memory & Replay"
+  - battalion_id: "B06-ADVERSARIAL-VERIFICATION"
+    name: "Adversarial Verification & Anti-Hallucination Battalion"
+    repo_backing: ["aditya55496/security-audit-skill", "aditya55496/hallmark"]
     agents:
-      - agent_id: "agent-storm"
-        name: "Stanford STORM Synthesis Engine"
-        repo: "aditya55496/storm"
-        role: "Multi-perspective synthesis and counter-claim validation"
-      - agent_id: "agent-gpt-researcher"
-        name: "Autonomous Investigative Pipeline"
-        repo: "aditya55496/gpt-researcher"
-        role: "Source gathering, filtering, and comprehensive report compiling"
-      - agent_id: "agent-dspy"
-        name: "Self-Optimizing Reasoning Compiler"
-        repo: "aditya55496/dspy"
-        role: "Compiles prompt programs and boosts test-time reasoning compute"
-      - agent_id: "agent-mem0"
-        name: "Long-Term Episodic Memory Layer"
-        repo: "aditya55496/mem0"
-        role: "Persistent cross-session memory tracking verified evidence over time"
-      - agent_id: "agent-shepherd"
-        name: "Reversible Meta-Agent Observer"
-        repo: "aditya55496/shepherd"
-        role: "Reversible Git-like observation and replay of all subagent executions"
+      - id: "agent-051"; name: "React UI Library Noise Filter"; role: "Discards standard MUI, Emotion, and CSS grid artifacts"
+      - id: "agent-052"; name: "Production vs Dev Code Discriminator"; role: "Separates dead development strings from live endpoints"
+      - id: "agent-053"; name: "Dual-Verification Evidence Assessor"; role: "Requires at least 2 independent bundle proofs per claim"
+      - id: "agent-054"; name: "False Positive Rejection Gatekeeper"; role: "Rejects unverified inferences before consensus commits"
+      - id: "agent-055"; name: "CWE Taxonomy Classifier"; role: "Maps technical findings to standard MITRE CWE identifiers"
+      - id: "agent-056"; name: "Potemkin Screen Stress Tester"; role: "Verifies whether dashboard values are hardcoded or dynamic"
+      - id: "agent-057"; name: "API Route Response Validator"; role: "Cross-references client route declarations against live gateways"
+      - id: "agent-058"; name: "Null Hypothesis Adversary"; role: "Constructs formal counter-arguments against each major finding"
+      - id: "agent-059"; name: "Confidence Scorer"; role: "Calculates mathematical confidence metrics (0.0 to 1.0) for findings"
+      - id: "agent-060"; name: "Evidence Tag Finalizer"; role: "Applies strict REA tags: Confirmed, Plausible, or Unknown"
+
+  # =========================================================================
+  # BATTALION 7: STANFORD STORM MULTI-PERSPECTIVE DEBATE (Agents 61-70)
+  # =========================================================================
+  - battalion_id: "B07-STORM-PERSPECTIVE-DEBATE"
+    name: "Stanford STORM Multi-Perspective Synthesis Battalion"
+    repo_backing: ["aditya55496/storm", "aditya55496/dspy"]
+    agents:
+      - id: "agent-061"; name: "Election Administrator Persona"; role: "Evaluates findings from the operational perspective of ERO/DEO"
+      - id: "agent-062"; name: "Constitutional Law Scholar Persona"; role: "Grounds findings against Articles 14, 15, 21, 324, 325, 326"
+      - id: "agent-063"; name: "Digital Privacy Advocate Persona"; role: "Assesses Puttaswamy privacy and DPDP Act compliance"
+      - id: "agent-064"; name: "Software Security Architect Persona"; role: "Audits architectural security against OWASP Top 10 standards"
+      - id: "agent-065"; name: "Opposition Booth Agent (BLA) Persona"; role: "Evaluates administrative disabling (markDisable) impacts"
+      - id: "agent-066"; name: "Statutory Returning Officer Persona"; role: "Evaluates counting center result decryption and static IVs"
+      - id: "agent-067"; name: "Voter Rights Advocate Persona"; role: "Assesses impact of auto-deletions on disenfranchised electors"
+      - id: "agent-068"; name: "Forensic Data Scientist Persona"; role: "Audits statistical anomalies in turnout and progeny datasets"
+      - id: "agent-069"; name: "Official Vendor Architect Persona"; role: "Examines third-party vendor routing and data isolation"
+      - id: "agent-070"; name: "STORM Master Synthesizer"; role: "Reconciles all 9 perspectives into balanced forensic findings"
+
+  # =========================================================================
+  # BATTALION 8: METAGPT & SWE-AGENT SOFTWARE ENGINEERING (Agents 71-80)
+  # =========================================================================
+  - battalion_id: "B08-SOFTWARE-ENGINEERING"
+    name: "MetaGPT & SWE-Agent Engineering Battalion"
+    repo_backing: ["aditya55496/MetaGPT", "aditya55496/SWE-agent", "aditya55496/ChatDev"]
+    agents:
+      - id: "agent-071"; name: "MetaGPT Chief Architect"; role: "Models systemic architecture of the ECINet portal suite"
+      - id: "agent-072"; name: "MetaGPT Senior Engineer"; role: "Develops reproduction scripts for client-side cryptographic flaws"
+      - id: "agent-073"; name: "MetaGPT Code Reviewer"; role: "Conducts peer reviews on all AST and regex extraction scripts"
+      - id: "agent-074"; name: "MetaGPT QA Engineer"; role: "Validates JSON schemas and tests report extraction pipelines"
+      - id: "agent-075"; name: "SWE-Agent Benchmark Runner"; role: "Executes automated navigation loops across complex codebases"
+      - id: "agent-076"; name: "ChatDev Virtual Programmer"; role: "Generates standalone verification tools for public audit"
+      - id: "agent-077"; name: "ChatDev Testing Lead"; role: "Runs automated unit tests against extracted regex and AST rules"
+      - id: "agent-078"; name: "ChatDev Technical Writer"; role: "Maintains clear, jargon-free explanations of code mechanics"
+      - id: "agent-079"; name: "SOP Pipeline Enforcer"; role: "Ensures all investigation actions adhere to strict engineering SOPs"
+      - id: "agent-080"; name: "Dependency & Lockfile Auditor"; role: "Monitors upstream package dependencies for supply chain risks"
+
+  # =========================================================================
+  # BATTALION 9: MEMORY, KNOWLEDGE GRAPH & REPLAY (Agents 81-90)
+  # =========================================================================
+  - battalion_id: "B09-MEMORY-KNOWLEDGE-GRAPH"
+    name: "Episodic Memory & Reversible Execution Battalion"
+    repo_backing: ["aditya55496/mem0", "aditya55496/shepherd", "aditya55496/claude-mem"]
+    agents:
+      - id: "agent-081"; name: "Mem0 Episodic Logger"; role: "Persists cross-session evidence and findings across runs"
+      - id: "agent-082"; name: "Knowledge Graph Entity Linker"; role: "Maps relationships between endpoints, forms, and statutes"
+      - id: "agent-083"; name: "Shepherd Execution Tracker"; role: "Logs git-like state checkpoints of all subagent executions"
+      - id: "agent-084"; name: "Trajectory Compressor"; role: "Compresses multi-step agent reasoning traces to cut token overhead"
+      - id: "agent-085"; name: "Historical Diff Indexer"; role: "Indexes changes between bundle builds across election phases"
+      - id: "agent-086"; name: "Cross-Session Context Restorer"; role: "Restores investigation state instantly when user returns"
+      - id: "agent-087"; name: "Semantic Similarity Embedder"; role: "Groups related API endpoints by vector similarity"
+      - id: "agent-088"; name: "Audit Trail Cryptographic Signer"; role: "Generates tamper-evident SHA-256 hashes of all audit logs"
+      - id: "agent-089"; name: "Decisions & Rationale Keeper"; role: "Records why specific anomalies were classified as critical"
+      - id: "agent-090"; name: "Memory Optimization Cleaner"; role: "Sweeps stale logs to maintain 0 MB local Mac disk pressure"
+
+  # =========================================================================
+  # BATTALION 10: EXECUTIVE CONSENSUS & ALERT DISPATCH (Agents 91-100)
+  # =========================================================================
+  - battalion_id: "B10-EXECUTIVE-DISPATCH"
+    name: "Executive Consensus & Alert Dispatch Battalion"
+    repo_backing: ["aditya55496/hermes-agent", "aditya55496/gpt-researcher"]
+    agents:
+      - id: "agent-091"; name: "Consensus Voting Arbiter"; role: "Tallies verification votes across all 9 operational battalions"
+      - id: "agent-092"; name: "Severity Matrix Calculator"; role: "Ranks findings on standard 1.0 to 10.0 critical severity scale"
+      - id: "agent-093"; name: "Smoking Gun Threshold Evaluator"; role: "Enforces user rule: report only findings of Form 6 caliber"
+      - id: "agent-094"; name: "Master Dossier Synchronizer"; role: "Maintains synchronization between HTML, PDF, and Markdown briefs"
+      - id: "agent-095"; name: "Telemetry JSON State Committer"; role: "Writes verified consensus state to telemetry/swarm_state.json"
+      - id: "agent-096"; name: "Emergency Drift Notifier"; role: "Generates high-priority alert markdown if buildDate changes"
+      - id: "agent-097"; name: "Plain English Synthesizer"; role: "Translates complex AST findings into clear, direct summaries"
+      - id: "agent-098"; name: "Audit Evidence Hyperlinker"; role: "Injects verified source line references into technical reports"
+      - id: "agent-099"; name: "Periodic Heartbeat Emitter"; role: "Maintains regular health pings for the autonomous scheduler"
+      - id: "agent-100"; name: "Chief Swarm Marshal (Hermes)"; role: "Coordinates all 99 subordinate agents and leads the fleet"
