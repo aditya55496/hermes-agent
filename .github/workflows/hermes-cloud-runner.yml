@@ -1,0 +1,45 @@
+name: Hermes Agent Cloud Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Hermes command or prompt to run'
+        required: true
+        default: 'doctor'
+      provider:
+        description: 'LLM Provider (e.g., openrouter, fireworks, gemini, nous)'
+        required: false
+        default: 'openrouter'
+
+jobs:
+  run-hermes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg ripgrep curl git sqlite3
+
+      - name: Install Hermes Agent
+        run: |
+          curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+          echo "$HOME/.hermes/bin" >> $GITHUB_PATH
+
+      - name: Execute Hermes Command
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          export PATH="$HOME/.hermes/bin:$PATH"
+          echo "Running Hermes with input: ${{ github.event.inputs.command }}"
+          hermes ${{ github.event.inputs.command }}
