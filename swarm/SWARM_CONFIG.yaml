@@ -1,8 +1,8 @@
-# Full 20-Agent Forensic Swarm Specification
-# Ecosystem Integration: @aditya55496 Tooling & Framework Repositories
+# Full 25-Agent Master Forensic & Autonomous Swarm Fleet
+# Ecosystem Integration: Premier Hackathon Winners & Industry Standard Frameworks (@aditya55496)
 
-version: "3.0"
-swarm_name: "ECINet Master Forensic Swarm Fleet"
+version: "4.0"
+swarm_name: "ECINet Master Forensic Swarm Fleet (25-Agent Full Fleet)"
 lead_orchestrator:
   agent_id: "hermes-master-orchestrator"
   repo: "aditya55496/hermes-agent"
@@ -33,10 +33,10 @@ phases:
         role: "Immutable cryptographic snapshotting of changing portals and gazettes"
 
   # =========================================================================
-  # PHASE 2: STRUCTURAL DEOBFUSCATION & AST PARSING
+  # PHASE 2: STRUCTURAL DEOBFUSCATION, AST PARSING & SEMANTIC ANALYSIS
   # =========================================================================
   - phase_id: "phase-2-deobfuscation"
-    name: "Structural AST Code Extraction & Bundle Unpacking"
+    name: "Structural AST Code Extraction & Semantic Code Analysis"
     agents:
       - agent_id: "agent-webcrack"
         name: "Webpack Deobfuscator & Unpacker"
@@ -50,6 +50,10 @@ phases:
         name: "Structural Syntax Query Engine"
         repo: "aditya55496/ast-grep"
         role: "AST code search across minified trees for crypto keys and route tables"
+      - agent_id: "agent-semgrep"
+        name: "Semantic Vulnerability & Pattern Auditor (11k★)"
+        repo: "aditya55496/semgrep"
+        role: "Deep semantic pattern matching for hardcoded credentials, insecure routes, and statutory gaps"
 
   # =========================================================================
   # PHASE 3: FORENSIC RUNTIME & SECRET AUDITING
@@ -94,9 +98,32 @@ phases:
         role: "Infrastructure and network reconnaissance across public endpoints"
 
   # =========================================================================
-  # PHASE 5: REASONING AMPLIFICATION, MEMORY & SYNTHESIS
+  # PHASE 5: ELITE MULTI-AGENT COLLABORATION, ROLE-PLAYING & SOFTWARE ENGINEERING
   # =========================================================================
-  - phase_id: "phase-5-synthesis"
+  - phase_id: "phase-5-elite-agents"
+    name: "Hackathon-Winning Multi-Agent Frameworks & Collaborative Intelligence"
+    agents:
+      - agent_id: "agent-metagpt"
+        name: "MetaGPT SOP Multi-Role Enterprise (53k★)"
+        repo: "aditya55496/MetaGPT"
+        role: "Standard Operating Procedure multi-agent role-play: Architect, Reviewer, Engineer, QA"
+      - agent_id: "agent-crewai"
+        name: "CrewAI Autonomous Task Fleet (28k★)"
+        repo: "aditya55496/crewAI"
+        role: "Hierarchical multi-agent crew execution with automated task delegation"
+      - agent_id: "agent-chatdev"
+        name: "ChatDev Virtual Multi-Agent Company (26k★)"
+        repo: "aditya55496/ChatDev"
+        role: "Communicative agent assembly line validating code and documentation integrity"
+      - agent_id: "agent-swe-agent"
+        name: "Princeton SWE-Agent Bug Resolver (16k★)"
+        repo: "aditya55496/SWE-agent"
+        role: "Autonomous code navigation and issue analysis benchmarked on SWE-bench"
+
+  # =========================================================================
+  # PHASE 6: REASONING AMPLIFICATION, MEMORY & SYNTHESIS
+  # =========================================================================
+  - phase_id: "phase-6-synthesis"
     name: "Multi-Perspective Synthesis, Memory & Replay"
     agents:
       - agent_id: "agent-storm"
