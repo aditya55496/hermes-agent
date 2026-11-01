@@ -1,0 +1,53 @@
+# Hermes Multi-Agent Forensic Swarm Specification
+# Architecture: Hierarchical Self-Coordinating Subagent Swarm
+
+version: "2.0"
+swarm_name: "ECINet Forensic Multi-Agent Cluster"
+coordinator:
+  agent_id: "hermes-master-orchestrator"
+  role: "Chief Intelligence Coordinator"
+  responsibilities:
+    - Receive intelligence streams from specialized worker agents.
+    - Resolve contradictions and eliminate false positives.
+    - Synthesize verified findings into high-priority actionable alerts.
+
+worker_agents:
+  - agent_id: "agent-sentinel-01"
+    name: "Portal Sentinel & Telemetry Watcher"
+    cadence: "Continuous 6h cycle"
+    tasks:
+      - Monitor ecinet.eci.gov.in/meta.json and buildDate timestamp drift.
+      - Track gateway-officials.eci.gov.in and electoralsearch.eci.gov.in header state.
+      - Trigger downstream worker alerts on any build hash rotation.
+
+  - agent_id: "agent-deobfuscator-02"
+    name: "AST Route & Webpack Chunk Parser"
+    cadence: "Event-driven upon Sentinel alert"
+    tasks:
+      - De-minify newly detected Webpack chunks.
+      - Extract internal API paths (/api/v1/...) using AST pattern matching.
+      - Detect unrouted constants (e.g., legacy roll markers, backdoor tokens).
+
+  - agent_id: "agent-statutory-03"
+    name: "Statutory & Regulatory Mapping Auditor"
+    cadence: "On new route discovery"
+    tasks:
+      - Map detected routes to statutory requirements (RPA 1950/1951, CER 1961).
+      - Audit Form 17A status (statutory voter register under Rule 49L).
+      - Audit Form 17C status (ballot paper account under Rules 49S/56C).
+      - Audit Form 6 / 6B / 7 / 8 endpoints for PII and unmasked Aadhaar leakage.
+
+  - agent_id: "agent-adversarial-04"
+    name: "Adversarial Verifier & Noise Filter"
+    cadence: "Pre-alert verification gate"
+    tasks:
+      - Filter out generic framework artifacts (e.g., standard MUI grid classes).
+      - Categorize findings into strictly verified tiers: Confirmed, Plausible, Unknown.
+      - Reject unverified or low-confidence claims.
+
+  - agent_id: "agent-dossier-05"
+    name: "Dossier Publisher & Telemetry Logger"
+    cadence: "Post-verification"
+    tasks:
+      - Update telemetry/swarm_state.json with timestamped consensus matrix.
+      - Format markdown/HTML incident briefs for instant retrieval by Antigravity.
