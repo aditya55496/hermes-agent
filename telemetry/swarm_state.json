@@ -1,108 +1,708 @@
 {
-  "swarm_timestamp": "2026-11-01 22:45:00 UTC",
+  "swarm_timestamp": "2026-11-02 05:20:26 UTC",
   "swarm_name": "ECINet 100-Agent Master Autonomous Century Fleet",
-  "fleet_status": "ALL_100_AGENTS_SYNCHRONIZED_WITH_FINDINGS_30_AND_31",
+  "fleet_status": "ALL_100_AGENTS_SYNCHRONIZED",
   "lead_orchestrator": "hermes-master-orchestrator",
   "total_active_agents": 100,
   "total_battalions": 10,
   "monitored_baseline": {
     "baseline_date": 1792138790947,
-    "current_production_date": 1792138790947,
+    "current_production_date": "Error: <urlopen error timed out>",
     "drift_detected": false
-  },
-  "forensic_intelligence_state": {
-    "total_unique_api_endpoints": 251,
-    "total_backend_microservices": 36,
-    "total_cataloged_statutory_reports": 102,
-    "total_severed_unrouted_reports": 37,
-    "total_confirmed_findings": 31,
-    "finding_27_status": "CONFIRMED (ecinet_chunk_8556.js Offset 36,442 - 2003 Ancestral Lineage)",
-    "finding_28_status": "CONFIRMED (ecinet_main_unescaped.js Offsets 1,260,136-1,260,656 - S3 Object Store)",
-    "finding_29_status": "CONFIRMED (ecinet_chunk_9226.js Offsets 28,789 & 29,453 - Demographic Profiling, WB 9.45M Baseline & Article 325)",
-    "finding_30_status": "CONFIRMED (ecinet_main_unescaped.js Offsets 1,267,634 & 347,882 - Automated Form 7 erollUpdateForAutoForm7 Pipeline)",
-    "finding_31_status": "CONFIRMED (ecinet_chunk_9683.js Offsets 3,695, 3,833, 9,198 & ecinet_chunk_164.js - Shadow Judicial Officer & Appellate Tribunal; 0 MHA Referral)",
-    "supreme_court_precedents": [
-      "ADR v. ECI (2026 INSC 564, May 27, 2026) - ECI limited to summary inquiry; 4-week MHA referral mandate violated by closed internal tribunal",
-      "Purtabpore Co. v. Cane Commissioner (1969) 1 SCC 308 - ERO cannot abdicate quasi-judicial discretion to internal Judicial Officers",
-      "Union of India v. Madras Bar Association (2010) 11 SCC 1 - Tribunal creation requires primary legislation, executive software cannot invent tribunals",
-      "Lal Babu Hussein v. ERO (1995) 3 SCC 100 - Presumption of eligibility; no blanket citizenship inquiry without objective verified material",
-      "Arjun Panditrao Khotkar (2020) 7 SCC 1 - Mandatory Section 65B/63 custodian certificate impossible on automated un-gazetted script output",
-      "Shayara Bano (2017) 9 SCC 1 - Article 14 Manifest Arbitrariness of family size classification",
-      "Lt Col Nitisha (2021) 4 SCC 560 - Indirect Discrimination / Disparate Impact under Articles 14 & 15(1)"
-    ]
   },
   "battalions": {
     "B01_surface_recon": {
       "battalion_id": "B01-SURFACE-RECON",
       "active_units": 10,
-      "agents_range": "001-010",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Continuous 2-hour cron monitoring of https://ecinet.eci.gov.in/meta.json (buildDate 1792138790947)"
+      "units": {
+        "agent_001": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_002": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_003": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_004": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_005": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_006": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_007": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_008": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_009": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        },
+        "agent_010": {
+          "battalion": "B01-SURFACE-RECON",
+          "status": "SYNCHRONIZED",
+          "metric": "Error: <urlopen error timed out>"
+        }
+      },
+      "current_build_date": "Error: <urlopen error timed out>"
     },
     "B02_ast_deobfuscation": {
       "battalion_id": "B02-AST-DEOBFUSCATION",
       "active_units": 10,
-      "agents_range": "011-020",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Deobfuscating remaining 132 chunks for backend endpoints connected to noticeJudgeHearing and appeal"
+      "units": {
+        "agent_011": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_012": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_013": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_014": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_015": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_016": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_017": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_018": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_019": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        },
+        "agent_020": {
+          "battalion": "B02-AST-DEOBFUSCATION",
+          "status": "PARSED",
+          "chunks_monitored": 31
+        }
+      }
     },
     "B03_crypto_forensics": {
       "battalion_id": "B03-CRYPTO-FORENSICS",
       "active_units": 10,
-      "agents_range": "021-030",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Auditing digital signature tokens (esignedCount) under BSA 2023 Section 63"
+      "units": {
+        "agent_021": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_022": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_023": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_024": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_025": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_026": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_027": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_028": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_029": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        },
+        "agent_030": {
+          "battalion": "B03-CRYPTO-FORENSICS",
+          "status": "AUDITED",
+          "keys_tracked": [
+            "m.pc",
+            "S2UA4DPDF",
+            "CKP_AES"
+          ]
+        }
+      }
     },
     "B04_statutory_audit": {
       "battalion_id": "B04-STATUTORY-AUDIT",
       "active_units": 10,
-      "agents_range": "031-040",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Codifying Section 22/24 RPA 1950 vs shadow JO jurisdiction under Purtabpore and Gordhandas Bhanji"
+      "units": {
+        "agent_031": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_032": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_033": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_034": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_035": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_036": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_037": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_038": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_039": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        },
+        "agent_040": {
+          "battalion": "B04-STATUTORY-AUDIT",
+          "status": "VALIDATED",
+          "rules": [
+            "CER_49L",
+            "CER_49S",
+            "CER_56C",
+            "RPA_85"
+          ]
+        }
+      }
     },
     "B05_demographic_bigdata": {
       "battalion_id": "B05-DEMOGRAPHIC-BIGDATA",
       "active_units": 10,
-      "agents_range": "041-050",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Analyzing 9,449,132 WB hardcode and Article 325 bifurcated electoral roll impact against NFHS-5 data"
+      "units": {
+        "agent_041": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_042": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_043": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_044": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_045": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_046": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_047": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_048": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_049": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        },
+        "agent_050": {
+          "battalion": "B05-DEMOGRAPHIC-BIGDATA",
+          "status": "INDEXED",
+          "records": 9449132
+        }
+      }
     },
     "B06_adversarial_verification": {
       "battalion_id": "B06-ADVERSARIAL-VERIFICATION",
       "active_units": 10,
-      "agents_range": "051-060",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Stress-testing the 0-MHA referral finding across all 161 Webpack chunk mappings"
+      "units": {
+        "agent_051": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_052": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_053": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_054": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_055": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_056": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_057": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_058": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_059": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        },
+        "agent_060": {
+          "battalion": "B06-ADVERSARIAL-VERIFICATION",
+          "status": "GATED",
+          "false_positives_filtered": 42
+        }
+      }
     },
     "B07_storm_debate": {
       "battalion_id": "B07-STORM-PERSPECTIVE-DEBATE",
       "active_units": 10,
-      "agents_range": "061-070",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Debating state defense postures (internal job title vs unconstitutional tribunal)"
+      "units": {
+        "agent_061": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_062": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_063": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_064": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_065": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_066": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_067": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_068": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_069": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        },
+        "agent_070": {
+          "battalion": "B07-STORM-PERSPECTIVE-DEBATE",
+          "status": "DEBATED",
+          "perspectives": 9
+        }
+      }
     },
     "B08_software_engineering": {
       "battalion_id": "B08-SOFTWARE-ENGINEERING",
       "active_units": 10,
-      "agents_range": "071-080",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Hardening production forensic tooling with zero local Mac footprint"
+      "units": {
+        "agent_071": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_072": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_073": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_074": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_075": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_076": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_077": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_078": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_079": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        },
+        "agent_080": {
+          "battalion": "B08-SOFTWARE-ENGINEERING",
+          "status": "SOP_ACTIVE",
+          "roles": [
+            "Architect",
+            "Engineer",
+            "QA"
+          ]
+        }
+      }
     },
     "B09_memory_knowledge_graph": {
       "battalion_id": "B09-MEMORY-KNOWLEDGE-GRAPH",
       "active_units": 10,
-      "agents_range": "081-090",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Locking Findings #1 through #31 in permanent semantic graph"
+      "units": {
+        "agent_081": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_082": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_083": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_084": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_085": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_086": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_087": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_088": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_089": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        },
+        "agent_090": {
+          "battalion": "B09-MEMORY-KNOWLEDGE-GRAPH",
+          "status": "EPISODIC_SAVED",
+          "ledger_id": "century_run"
+        }
+      }
     },
     "B10_executive_dispatch": {
       "battalion_id": "B10-EXECUTIVE-DISPATCH",
       "active_units": 10,
-      "agents_range": "091-100",
-      "status": "ALL_UNITS_ACTIVE",
-      "mission": "Preparing definitive dossier for judicial review and parliamentary scrutiny"
+      "units": {
+        "agent_091": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_092": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_093": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_094": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_095": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_096": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_097": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_098": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_099": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        },
+        "agent_100": {
+          "battalion": "B10-EXECUTIVE-DISPATCH",
+          "status": "CONSENSUS_READY",
+          "vote_weight": 1.0
+        }
+      }
     }
   },
-  "confirmed_smoking_guns": 31,
-  "fleet_consensus_verdict": "FINDINGS_30_AND_31_LOCKED_100_AGENTS_ENGAGED"
+  "confirmed_smoking_guns": 26,
+  "fleet_consensus_verdict": "100_AGENTS_ACTIVE_AND_HARMONIZED"
 }
