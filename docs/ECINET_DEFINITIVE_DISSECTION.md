@@ -133,6 +133,39 @@
 
 ---
 
+### Finding #32: The "Potemkin Village" Subsystems (Fake EVMs, Mock Counting Centres & Bogus Security Plans)
+- **Exact Files & Offsets:**
+  - `ecinet_chunk_2155.js` (Module 72155, `/home/evm-detail`): Zero backend APIs. Renders hardcoded mock data for Ghaziabad AC-20: `BU: 1234, CU: 456, VVPAT: 123` across all polling and reserve categories nationwide.
+  - `ecinet_chunk_5776.js` (Module 75776, `/home/countingCentreDetails`): Zero backend APIs. Renders hardcoded mock object: `{ name: "Hall No.1, Primary School", location: "Laxmi Nagar, New Delhi" }` for all users.
+  - `ecinet_chunk_9436.js` (Module 19436, `/home/close-of-poll`): Renders `"Form 17C Download"` as static unlinked text without an `<a>` tag or click listener.
+  - `ecinet_chunk_4018.js`, `9465.js`, `6352.js`: Law and order / CAPF force deployment dashboards execute `POST ENCORE_URL + "/nominationCountAPI"`, masquerading candidate nomination statistics as security deployment plans.
+
+---
+
+### Finding #33: Total Statutory Blackout of Form 20, Form 21E, and Form 16 under CER 1961
+- **Complete Omission of Mandatory Statutory Instruments:**
+  - **Form 20 (Final Result Sheet):** Rule 56C(2)(c), Rule 65 — 100% OMITTED (0 mentions, 0 routes, 0 APIs). Eliminates polling-station-wise candidate vote counts.
+  - **Form 21E (Return of Election):** Rule 64 — 100% OMITTED (0 mentions, 0 routes, 0 APIs). Suppresses the official legal instrument declaring election outcomes.
+  - **Form 16 (Ballot Paper Account):** Rule 45 — 100% OMITTED. Prevents physical vs issued ballot auditing.
+  - **Form 17A (Register of Voters):** Rule 49L — 100% OMITTED. Suppresses the single cross-check between physical voters and EVM tallies.
+  - **Form 17B, 14, 14A (Tendered & Challenged Votes):** Rules 36, 40, 49P — 100% OMITTED.
+
+---
+
+### Finding #34: Severe Security Vulnerabilities (Unmasked Aadhaar API & Direct Keycloak IAM Role Tampering)
+- **Unmasked Aadhaar Retrieval:** Endpoint `api/v1/aadhar-connector/get-aadhar/internal/fetchAadhaarNumber?epicNo=&isAadhaarMasked=false` allows direct retrieval of plain-text, unmasked 12-digit Aadhaar numbers using voter EPICs, breaching Section 29 of the Aadhaar Act, 2016.
+- **Direct Keycloak IAM Role Tampering:** Endpoints `/api/v1/user-management/role/addRolesKeycloack` and `deleteRolesKeycloack` expose administrative role creation directly over REST, allowing client-side privilege escalation.
+- **Arbitrary Document Store Manipulation (IDOR):** Endpoints `api/v1/document/deleteFile?bucketName=objectstorage&fileName=` and `uploadFile` allow unrestricted write and delete operations on flat S3 buckets without authentication nonces.
+- **Zero-Authentication Broadcast:** In `ecinet_chunk_9765.js`, `POST api/v1/notification-alert/submitNotificationData` dispatches alerts with `{ headers: {} }`, lacking bearer token validation.
+
+---
+
+### Finding #35: National Infiltration of Assam/NRC "D-Voter" Query Parameters
+- **Exact Files:** `ecinet_chunk_4361.js` & `ecinet_chunk_386.js` (Druid Roll Analytics).
+- **Nationwide D-Voter Injection:** Druid queries include `{ dvoter: 0, overSeas: 0, eType: [0], tillDateDttm: "2100-01-01 23:59:59" }`, hardcoding the Assam-specific "Doubtful Voter" category into nationwide electoral roll analytics.
+
+---
+
 ## 7. Microservice Inventory Summary (251 Endpoints / 36 Services)
 - `user-management`: 69 endpoints (role mapping, disable officer, Keycloak assign)
 - `druid`: 19 endpoints + `analytics`: 8 endpoints (Druid roll query, gender ratio, anomaly metrics)
